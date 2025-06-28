@@ -15,10 +15,10 @@ const CountDownTimer = () => {
 
   useEffect(() => {
     const interval = startCountdown(setRemainingTime, {
-      days: 0,
+      days: 10,
       hours: 0,
-      minutes: 1,
-      seconds: 10,
+      minutes: 0,
+      seconds: 0,
     });
     return () => clearInterval(interval);
   }, []);
@@ -42,8 +42,6 @@ const CountDownTimer = () => {
 
     previousValuesRef.current = remainingTime;
   }, [remainingTime]);
-
-
 
   return (
     <div className="countdown-section">

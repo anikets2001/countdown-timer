@@ -1,3 +1,45 @@
 .countdown-page-wrapper {
   height: 100vh;
 }
+
+@media (max-width: 640px) {
+  .countdown-page-wrapper {
+    .countdown-section {
+      .countdown-wrapper {
+        .heading {
+          font-size: 18px;
+        }
+
+        .timer-wrapper {
+          gap: 16px;
+
+          .time-box {
+            .flip-card {
+              width: 60px;
+              height: 60px;
+            }
+            
+            .time-label {
+              font-size: 12px;
+            }
+
+            .count {
+              font-size: 28px;
+            }
+          }
+        }
+      }
+    }
+
+    .countdown-footer {
+      .links-wrapper {
+        gap: 16px;
+
+        .social-link img {
+          width: 16px;
+          height: 16px;
+        }
+      }
+    }
+  }
+}
