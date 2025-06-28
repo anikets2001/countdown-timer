@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { timeUnits } from "../utils/config";
+import { startCountdown } from "../utils/helpers";
 
 const CountDownTimer = () => {
   const [remainingTime, setRemainingTime] = useState({
@@ -9,59 +10,13 @@ const CountDownTimer = () => {
     seconds: "00",
   });
 
-  function formatTime(num) {
-    return num < 10 ? "0" + num : num;
-  }
-
-  function getRemainingTime(initialDate) {
-    const now = new Date();
-    const timeDiff = initialDate - now;
-
-    const totalSeconds = Math.floor(timeDiff / 1000);
-    const totalMinutes = Math.floor(totalSeconds / 60);
-    const totalHours = Math.floor(totalMinutes / 60);
-
-    const days = formatTime(Math.floor(totalHours / 24));
-    const hours = formatTime(totalHours % 24);
-    const minutes = formatTime(totalMinutes % 60);
-    const seconds = formatTime(totalSeconds % 60);
-
-    return { days, hours, minutes, seconds, isComplete: timeDiff <= 0 };
-  }
-
-  function startCountdown(setTimeLeft) {
-    const initialDate = new Date();
-    initialDate.setDate(initialDate.getDate() + 14);
-
-    const timerID = setInterval(() => {
-      const result = getRemainingTime(initialDate);
-
-      if (result.isComplete) {
-        alert("time's up");
-        clearInterval(timerID);
-
-        setTimeLeft({
-          days: "00",
-          hours: "00",
-          minutes: "00",
-          seconds: "00",
-        });
-        return;
-      }
-
-      setTimeLeft({
-        days: result.days,
-        hours: result.hours,
-        minutes: result.minutes,
-        seconds: result.seconds,
-      });
-    }, 1000);
-
-    return timerID;
-  }
-
   useEffect(() => {
-    const interval = startCountdown(setRemainingTime);
+    const interval = startCountdown(setRemainingTime, {
+      days: 0,
+      hours: 0,
+      minutes: 1,
+      seconds: 10,
+    });
     return () => clearInterval(interval);
   }, []);
 
