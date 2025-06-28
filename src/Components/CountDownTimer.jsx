@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { timeUnits } from "../utils/config";
 import { startCountdown } from "../utils/helpers";
 
@@ -10,6 +10,9 @@ const CountDownTimer = () => {
     seconds: "00",
   });
 
+  const previousValuesRef = useRef(remainingTime);
+  const cardRefs = useRef({});
+
   useEffect(() => {
     const interval = startCountdown(setRemainingTime, {
       days: 0,
@@ -20,6 +23,28 @@ const CountDownTimer = () => {
     return () => clearInterval(interval);
   }, []);
 
+  useEffect(() => {
+    timeUnits.forEach((unit) => {
+      const prev = previousValuesRef.current[unit.id];
+      const current = remainingTime[unit.id];
+
+      if (prev !== current) {
+        const card = cardRefs.current[unit.id];
+        if (card) {
+          card.classList.add("flip");
+
+          setTimeout(() => {
+            card.classList.remove("flip");
+          }, 600);
+        }
+      }
+    });
+
+    previousValuesRef.current = remainingTime;
+  }, [remainingTime]);
+
+
+
   return (
     <div className="countdown-section">
       <div className="countdown-wrapper">
@@ -28,7 +53,10 @@ const CountDownTimer = () => {
         <div className="timer-wrapper">
           {timeUnits.map((item) => (
             <div className="time-box" key={item?.id}>
-              <div className="flip-card">
+              <div
+                className="flip-card"
+                ref={(el) => (cardRefs.current[item.id] = el)}
+              >
                 <span className="dot left-dot" />
                 <span className="dot right-dot" />
                 <div className="top" />
