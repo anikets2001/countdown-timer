@@ -1,5 +1,7 @@
+import CountDown from "./Pages/CountDown";
+
 function App() {
-  return <h1>countdown app</h1>;
+  return <CountDown />;
 }
 
 export default App;
