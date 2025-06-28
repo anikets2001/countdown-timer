@@ -32,6 +32,10 @@
           overflow: hidden;
           box-shadow: 0 8px 0 rgba(0, 0, 0, 0.4);
 
+          &.flip {
+            animation: flip-up 0.5s ease-in-out;
+          }
+
           .top,
           .bottom {
             position: absolute;
@@ -84,9 +88,20 @@
           color: $color-grayish-blue;
           font-size: $font-size-body;
           letter-spacing: $spacing-xs;
-          @extend .text-uppercase
+          @extend .text-uppercase;
         }
       }
+    }
+  }
+  @keyframes flip-up {
+    0% {
+      transform: rotateX(0deg);
+    }
+    50% {
+      transform: rotateX(-90deg);
+    }
+    100% {
+      transform: rotateX(0deg);
     }
   }
 }
