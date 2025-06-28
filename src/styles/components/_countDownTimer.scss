@@ -1,0 +1,92 @@
+.countdown-section {
+  height: calc(100vh - 200px);
+  background-image: url("../../assets//images/bg-stars.svg");
+  background-color: $color-black-blue;
+
+  .countdown-wrapper {
+    @extend .padding-16;
+    @extend .h-100;
+    @extend .flex-center-column;
+
+    .heading {
+      color: $color-white;
+      font-size: $font-size-heading;
+      letter-spacing: $spacing-sm;
+      text-align: center;
+      @extend .text-uppercase;
+    }
+
+    .timer-wrapper {
+      @extend .margin-top-40;
+      @extend .flex-center-wrap;
+      gap: 24px;
+
+      .time-box {
+        @extend .flex-align-column;
+
+        .flip-card {
+          position: relative;
+          width: 90px;
+          height: 90px;
+          border-radius: 8px;
+          overflow: hidden;
+          box-shadow: 0 8px 0 rgba(0, 0, 0, 0.4);
+
+          .top,
+          .bottom {
+            position: absolute;
+            @extend .w-100;
+            @extend .h-50;
+            left: 0;
+            background-color: $color-dark-desaturated-blue;
+            z-index: 1;
+          }
+
+          .bottom {
+            bottom: 0;
+            border-top: 1px solid $color-very-dark-blue;
+            box-shadow: 0 8px 0 rgba(0, 0, 0, 0.4);
+          }
+
+          .count {
+            position: absolute;
+            z-index: 2;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: $font-size-timer;
+            font-weight: 700;
+            color: $color-soft-red;
+          }
+
+          .dot {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background-color: $color-very-dark-blue;
+            border-radius: 50%;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 3;
+          }
+
+          .left-dot {
+            left: -4px;
+          }
+
+          .right-dot {
+            right: -4px;
+          }
+        }
+
+        .time-label {
+          @extend .margin-top-16;
+          color: $color-grayish-blue;
+          font-size: $font-size-body;
+          letter-spacing: $spacing-xs;
+          @extend .text-uppercase
+        }
+      }
+    }
+  }
+}
